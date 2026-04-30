@@ -2,7 +2,7 @@ use async_trait::async_trait;
 use serde_json::json;
 use spice_framework::agent::{AgentConfig, AgentOutput, AgentUnderTest, ToolCall, Turn};
 use spice_framework::error::SpiceError;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 pub struct WeatherAgent {
     api_key: String,
@@ -147,6 +147,14 @@ impl AgentUnderTest for WeatherAgent {
             let mut tool_calls = Vec::new();
             let mut tool_results = Vec::new();
 
+            if !tool_calls_json.is_empty() {
+                // Add the assistant message with all tool calls once
+                messages.push(json!({
+                    "role": "assistant",
+                    "tool_calls": tool_calls_json
+                }));
+            }
+
             for tc in &tool_calls_json {
                 let id = tc
                     .get("id")
@@ -177,11 +185,7 @@ impl AgentUnderTest for WeatherAgent {
 
                 tool_results.push(json!(result));
 
-                // Add assistant message with tool calls and tool result to conversation
-                messages.push(json!({
-                    "role": "assistant",
-                    "tool_calls": tool_calls_json
-                }));
+                // Add each tool result message
                 messages.push(json!({
                     "role": "tool",
                     "tool_call_id": id,
