@@ -7,6 +7,7 @@ pub mod rbac;
 pub mod report;
 pub mod runner;
 pub mod test_case;
+pub mod toolkit;
 pub mod trace;
 
 pub use agent::{AgentConfig, AgentOutput, AgentUnderTest, ToolCall, Turn};
@@ -17,6 +18,7 @@ pub use rbac::RbacMatrix;
 pub use report::{SuiteReport, TestReport};
 pub use runner::{Runner, RunnerConfig};
 pub use test_case::{TestCase, TestCaseBuilder, TestSuite};
+pub use toolkit::{ParamDef, PromptTemplate, ToolDef, Toolkit};
 
 /// Convenience function to start building a test case.
 pub fn test(id: impl Into<String>, user_message: impl Into<String>) -> TestCaseBuilder {

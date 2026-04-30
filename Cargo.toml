@@ -24,3 +24,7 @@ path = "examples/mock_harness.rs"
 [[example]]
 name = "weather_agent"
 path = "examples/weather_agent/main.rs"
+
+[[example]]
+name = "recipe_agent"
+path = "examples/recipe_agent/main.rs"
