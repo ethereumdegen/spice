@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/spice-logo.svg" alt="Spice Logo" width="240" />
+</p>
+
 # Spice
 
 A Rust test framework for nondeterministic LLM agents.
